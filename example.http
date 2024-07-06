@@ -1,0 +1,210 @@
+@url = http://example.com/api/v1
+@token = example
+
+### Login
+POST {{url}}/auth/login HTTP/1.1
+Content-Type: application/json
+Accept: application/json
+
+{
+    "email": "person1@example.com",
+    "password": "123456"
+}
+
+### Logout
+POST {{url}}/auth/logout HTTP/1.1
+Content-Type: application/json
+Accept: application/json
+Authorization: Bearer {{token}}
+
+
+
+
+### Get all users
+GET {{url}}/users HTTP/1.1
+Accept: application/vnd.api+json
+
+### Get one user
+GET {{url}}/users/1 HTTP/1.1
+Accept: application/vnd.api+json
+
+### Create a new user
+POST {{url}}/users HTTP/1.1
+Accept: application/vnd.api+json
+Content-Type: application/vnd.api+json
+
+{
+  "data": {
+    "type": "users",
+    "attributes": {
+      "email": "person1@example.com",
+      "password": "123456"
+    }
+  }
+}
+
+
+
+### Get all localities
+GET {{url}}/localities HTTP/1.1
+Accept: application/vnd.api+json
+
+### Get one locality
+GET {{url}}/localities/4 HTTP/1.1
+Accept: application/vnd.api+json
+Authorization: Bearer 
+
+### Create a new locality
+POST {{url}}/localities HTTP/1.1
+Accept: application/vnd.api+json
+Content-Type: application/vnd.api+json
+Authorization: Bearer {{token}}
+
+{
+  "data": {
+    "type": "localities",
+    "attributes": {
+      "name": "Banfield"
+    }
+  }
+}
+
+
+
+### Get all addresses
+GET {{url}}/addresses HTTP/1.1
+Accept: application/vnd.api+json
+
+### Get one address
+GET {{url}}/addresses/7?include=locality HTTP/1.1
+Accept: application/vnd.api+json
+
+### Create a new address
+POST {{url}}/addresses HTTP/1.1
+Accept: application/vnd.api+json
+Content-Type: application/vnd.api+json
+Authorization: Bearer {{token}}
+
+{
+  "data": {
+    "type": "addresses",
+    "attributes": {
+      "street": "Maipu",
+      "number": 500
+    },
+    "relationships": {
+      "locality": {
+        "data": {
+          "type": "localities",
+          "id": "1"
+        }
+      }
+    }
+  }
+}
+
+
+
+### Get all persons
+GET {{url}}/persons HTTP/1.1
+Accept: application/vnd.api+json
+
+### Get one person
+GET {{url}}/persons/1 HTTP/1.1
+Accept: application/vnd.api+json
+
+### Create a new person
+POST {{url}}/persons HTTP/1.1
+Accept: application/vnd.api+json
+Content-Type: application/vnd.api+json
+Authorization: Bearer {{token}}
+
+{
+  "data": {
+    "type": "persons",
+    "attributes": {
+      "name": "Rodrigo",
+      "surname": "Obando",
+      "age": 28,
+      "phone": 1155555555
+    },
+    "relationships": {
+      "address": {
+        "data": {
+          "type": "addresses",
+          "id": "1"
+        }
+      },
+      "user": {
+        "data": {
+          "type": "users",
+          "id": "1"
+        }
+      }
+    }
+  }
+}
+
+
+
+### Get all patients
+GET {{url}}/patients HTTP/1.1
+Accept: application/vnd.api+json
+
+### Get one patient
+GET {{url}}/patients/1 HTTP/1.1
+Accept: application/vnd.api+json
+
+### Create a new patient
+POST {{url}}/patients HTTP/1.1
+Accept: application/vnd.api+json
+Content-Type: application/vnd.api+json
+Authorization: Bearer {{token}}
+
+{
+  "data": {
+    "type": "patients",
+    "attributes": {},
+    "relationships": {
+      "person": {
+        "data": {
+          "type": "persons",
+          "id": "1"
+        }
+      }
+    }
+  }
+}
+
+
+
+### Get all doctors
+GET {{url}}/doctors HTTP/1.1
+Accept: application/vnd.api+json
+
+### Get one doctor
+GET {{url}}/doctors/1 HTTP/1.1
+Accept: application/vnd.api+json
+
+### Create a new doctor
+POST {{url}}/doctors HTTP/1.1
+Accept: application/vnd.api+json
+Content-Type: application/vnd.api+json
+Authorization: Bearer {{token}}
+
+{
+  "data": {
+    "type": "doctors",
+    "attributes": {
+      "license": 999999
+    },
+    "relationships": {
+      "person": {
+        "data": {
+          "type": "persons",
+          "id": "1"
+        }
+      }
+    }
+  }
+}
