@@ -33,6 +33,7 @@ JsonApiRoute::server('v1')
         $server->resource('users', JsonApiController::class);
         $server->resource('patients', JsonApiController::class);
         $server->resource('doctors', JsonApiController::class);
+        $server->resource('appointments', JsonApiController::class);
 });
 
 

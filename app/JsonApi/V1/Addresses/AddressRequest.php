@@ -28,15 +28,11 @@ class AddressRequest extends ResourceRequest
     {
         // Validates if address already exists for that locality
         $validator->after(function ($validator) {
-            $conditions = [
-                ['street', request()->input('data.attributes.street')],
-                ['number', request()->input('data.attributes.number')],
-                ['locality_id', request()->input('data.relationships.locality.data.id')]
-            ];
+            $street = request()->input('data.attributes.street');
+            $number = request()->input('data.attributes.number');
+            $localityId = request()->input('data.relationships.locality.data.id');
 
-            $addressExists = Address::where($conditions)->exists();
-
-            if($addressExists) {
+            if(Address::alreadyExists($street, $number, $localityId)) {
                 $validator->errors()->add('address_unique', 'Address already exists for that locality.');
             }
         });

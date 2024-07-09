@@ -27,4 +27,15 @@ class Address extends Model
     {
         return $this->hasMany(Person::class);
     }
+
+    public static function alreadyExists($street, $number, $localityId)
+    {
+        $conditions = [
+            ['street', $street],
+            ['number', $number],
+            ['locality_id', $localityId]
+        ];
+
+        return self::where($conditions)->exists();
+    }
 }

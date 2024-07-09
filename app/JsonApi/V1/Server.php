@@ -39,6 +39,7 @@ class Server extends BaseServer
             Users\UserSchema::class,
             Patients\PatientSchema::class,
             Doctors\DoctorSchema::class,
+            Appointments\AppointmentSchema::class,
         ];
     }
 

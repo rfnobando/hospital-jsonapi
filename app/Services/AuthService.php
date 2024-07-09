@@ -2,12 +2,9 @@
 
 namespace App\Services;
 
-use App\Models\Locality;
-use App\Models\Address;
-use App\Models\Person;
 use App\Models\User;
 use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\Hash;
+
 
 class AuthService
 {
