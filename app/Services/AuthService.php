@@ -2,28 +2,23 @@
 
 namespace App\Services;
 
-use App\Models\User;
 use Illuminate\Support\Facades\Auth;
-
 
 class AuthService
 {
-    public function login(array $data)
+    public function doLogin(array $data)
     {
-        if(Auth::attempt($data)) {
-            $user = User::where('email', $data['email'])->first();
-            $token = $user->createToken('basic-token')->plainTextToken;
-
+        if(!Auth::attempt($data)) {
             return [
-                'message' => 'Logged in successfully.',
-                'status_code' => 200,
-                'token' => $token
+                'message' => 'Invalid credentials.',
+                'status_code' => 401
             ];
         }
 
         return [
-            'message' => 'Invalid credentials.',
-            'status_code' => 401
+            'message' => 'Logged in successfully.',
+            'status_code' => 200,
+            'token' => Auth::user()->createToken('basic-token')->plainTextToken
         ];
     }
 

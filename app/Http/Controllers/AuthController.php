@@ -2,11 +2,9 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Requests\RegisterRequest;
 use App\Http\Requests\LoginRequest;
 use App\Services\AuthService;
 use Illuminate\Http\JsonResponse;
-
 
 class AuthController extends Controller
 {
@@ -20,7 +18,7 @@ class AuthController extends Controller
     public function login(LoginRequest $request): JsonResponse
     {
         $data = $request->validated();
-        $arrayResponse = $this->authService->login($data);
+        $arrayResponse = $this->authService->doLogin($data);
 
         return new JsonResponse($arrayResponse, $arrayResponse['status_code']);
     }
